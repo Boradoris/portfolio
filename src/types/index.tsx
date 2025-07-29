@@ -1,4 +1,4 @@
-export type Panel = "about" | "portfolio" | "history";
+export type Panel = "about" | "project" | "history";
 
 export type ProjectT = {
   id: number;

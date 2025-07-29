@@ -84,8 +84,8 @@ const HeroPanel = ({ textControls, wrapperControls, introControls, selected, onS
           )}
         </button>
         <hr className="w-5 sm:w-6 border-t border-gray-300 dark:border-gray-600" />
-        {(["about", "portfolio", "history"] as Panel[]).map(panel => {
-          const Icon = panel === "about" ? FiUser : panel === "portfolio" ? FiBriefcase : FiClock;
+        {(["about", "project", "history"] as Panel[]).map(panel => {
+          const Icon = panel === "about" ? FiUser : panel === "project" ? FiBriefcase : FiClock;
           return (
             <button
               key={panel}

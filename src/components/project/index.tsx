@@ -1,13 +1,13 @@
 import React, { useState, useMemo, useCallback, useEffect, useRef, memo } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
-import PortfolioInfo from "./PortfolioInfo";
-import PortfolioCard from "./PortfolioCard";
+import ProjectInfo from "./ProjectInfo";
+import ProjectCard from "./ProjectCard";
 import { ProjectT } from "@/types";
 import { historyList } from "@/constants";
 
 const slides: ProjectT[] = historyList.flatMap(company => company.projects).reverse();
 
-const PortfolioPanel = () => {
+const ProjectPanel = () => {
   const [active, setActive] = useState<ProjectT[]>(slides);
   const [removed, setRemoved] = useState<ProjectT[]>([]);
   const [isResetting, setIsResetting] = useState(false);
@@ -85,7 +85,7 @@ const PortfolioPanel = () => {
       <div className="relative w-[32rem] h-[26rem] sm:w-[36rem] sm:h-[28rem] md:w-[40rem] md:h-[30rem] lg:w-[44rem] lg:h-[32rem] max-w-[44rem] max-h-[32rem]">
         <AnimatePresence initial={false}>
           {stack.map((card, i) => (
-            <PortfolioCard
+            <ProjectCard
               key={card.id}
               card={card}
               index={i}
@@ -96,7 +96,7 @@ const PortfolioPanel = () => {
           ))}
         </AnimatePresence>
       </div>
-      <PortfolioInfo
+      <ProjectInfo
         slide={currentSlide}
         current={currentIndex}
         total={total}
@@ -108,4 +108,4 @@ const PortfolioPanel = () => {
   );
 };
 
-export default memo(PortfolioPanel);
+export default memo(ProjectPanel);

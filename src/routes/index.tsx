@@ -7,7 +7,7 @@ const AppRoutes = () => (
     {routes.map(r => (
       <Route key={r.path} path={r.path} element={r.element} />
     ))}
-    <Route path="*" element={<Navigate to="/portfolio" replace />} />
+    <Route path="*" element={<Navigate to="/project" replace />} />
   </Routes>
 );
 

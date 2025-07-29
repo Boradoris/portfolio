@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import HeroPanel from "@/components/hero";
 import { Panel } from "@/types";
 
-const PortfolioPanel = React.lazy(() => import("@/components/portfolio"));
+const ProjectPanel = React.lazy(() => import("@/components/project"));
 const AboutPanel = React.lazy(() => import("@/components/about"));
 const HistoryPanel = React.lazy(() => import("@/components/history"));
 
@@ -34,12 +34,12 @@ const HomePage: FC = () => {
 
   const selected: Panel = useMemo(() => {
     const key = location.pathname.slice(1);
-    return key === "about" || key === "history" ? key : "portfolio";
+    return key === "about" || key === "history" ? key : "project";
   }, [location.pathname]);
 
   const onSelect = useCallback(
     (panel: Panel) => {
-      const to = panel === "portfolio" ? "/portfolio" : `/${panel}`;
+      const to = panel === "project" ? "/project" : `/${panel}`;
       if (location.pathname !== to) {
         navigate(to);
       }
@@ -81,7 +81,7 @@ const HomePage: FC = () => {
           <Suspense
             fallback={<div className="flex-1 flex items-center justify-center">로딩 중...</div>}
           >
-            {selected === "portfolio" && <PortfolioPanel />}
+            {selected === "project" && <ProjectPanel />}
             {selected === "about" && <AboutPanel />}
             {selected === "history" && <HistoryPanel />}
           </Suspense>
