@@ -16,7 +16,7 @@ interface CardProps {
   dirRef: React.MutableRefObject<number>;
 }
 
-const PortfolioCard = ({ card, index, isTop, onSwipe, dirRef }: CardProps) => {
+const ProjectCard = ({ card, index, isTop, onSwipe, dirRef }: CardProps) => {
   const handleDragEnd = useCallback(
     (_: any, info: { offset: { x: number } }) => {
       if (Math.abs(info.offset.x) > 100) {
@@ -78,4 +78,4 @@ const PortfolioCard = ({ card, index, isTop, onSwipe, dirRef }: CardProps) => {
   );
 };
 
-export default memo(PortfolioCard);
+export default memo(ProjectCard);

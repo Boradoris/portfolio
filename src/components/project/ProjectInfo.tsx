@@ -20,7 +20,7 @@ interface Props {
   isResetting: boolean;
 }
 
-const PortfolioInfo = ({ slide, current, total, onPrev, onNext, isResetting }: Props) => {
+const ProjectInfo = ({ slide, current, total, onPrev, onNext, isResetting }: Props) => {
   const [isPlaying, setIsPlaying] = useState(true);
   const progressControls = useAnimation();
   const [textVisible, setTextVisible] = useState(true);
@@ -186,4 +186,4 @@ const PortfolioInfo = ({ slide, current, total, onPrev, onNext, isResetting }: P
   );
 };
 
-export default memo(PortfolioInfo);
+export default memo(ProjectInfo);
