@@ -5,7 +5,7 @@ import viteCompression from "vite-plugin-compression";
 import { imageToWebpPlugin } from "vite-plugin-image-to-webp";
 
 export default defineConfig({
-  base: "/",
+  base: "/portfolio/",
   plugins: [
     react(),
     imageToWebpPlugin({
