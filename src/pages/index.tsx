@@ -1,4 +1,5 @@
-import React, { FC, useEffect, useMemo, useCallback, Suspense } from "react";
+// src/pages/HomePage.tsx
+import React, { useEffect, useMemo, useCallback, Suspense, FC } from "react";
 import { motion, useAnimation, Variants } from "framer-motion";
 import { useLocation, useNavigate } from "react-router-dom";
 import HeroPanel from "@/components/hero";
@@ -22,7 +23,6 @@ const panelAppearVariants: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
 };
 
-// HomePage 컴포넌트: HeroPanel 애니메이션 후 레이아웃 축소 및 URL에 따른 패널 전환 처리
 const HomePage: FC = () => {
   const textControls = useAnimation();
   const wrapperControls = useAnimation();
@@ -40,9 +40,7 @@ const HomePage: FC = () => {
   const onSelect = useCallback(
     (panel: Panel) => {
       const to = panel === "project" ? "/project" : `/${panel}`;
-      if (location.pathname !== to) {
-        navigate(to);
-      }
+      if (location.pathname !== to) navigate(to);
     },
     [navigate, location.pathname]
   );
@@ -79,7 +77,11 @@ const HomePage: FC = () => {
           animate={panelControls}
         >
           <Suspense
-            fallback={<div className="flex-1 flex items-center justify-center">로딩 중...</div>}
+            fallback={
+              <div className="flex-1 flex items-center justify-center">
+                <div className="loader" />
+              </div>
+            }
           >
             {selected === "project" && <ProjectPanel />}
             {selected === "about" && <AboutPanel />}
