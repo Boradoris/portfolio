@@ -69,6 +69,7 @@ const ProjectCard = ({ card, index, isTop, onSwipe, dirRef }: CardProps) => {
         src={card.image}
         alt={card.title}
         loading="lazy"
+        draggable="false"
         className={`absolute inset-0 w-full h-full object-center ${
           card.contain ? "object-contain" : "object-fill"
         }`}
