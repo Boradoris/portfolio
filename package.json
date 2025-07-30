@@ -7,14 +7,13 @@
   "scripts": {
     "dev": "vite --mode localhost",
     "build:dev": "tsc -b && vite build --mode development",
-    "build:prod": "tsc -b && vite build",
+    "build:prod": "tsc -b && vite build && cp dist/index.html dist/404.html",
     "preview": "vite preview",
     "lint": "eslint 'src/**/*.{ts,tsx}'",
     "lint:fix": "eslint 'src/**/*.{ts,tsx}' --fix",
     "format": "prettier --write 'src/**/*.{ts,tsx,js,jsx,json,css,scss,md}'",
-
     "predeploy": "yarn build:prod",
-    "deploy":   "gh-pages -d dist"
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.7",
