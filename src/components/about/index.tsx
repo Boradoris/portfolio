@@ -37,7 +37,7 @@ const AboutCard = () => {
       {/* Introduce */}
       <div className="space-y-4 text-gray-700 dark:text-gray-300 mb-8">
         <div className="flex items-center mb-4">
-          <h2 className="text-xl text-gray-900 dark:text-white">INTRODUCE</h2>
+          <h2 className="text-xl text-gray-800 dark:text-white">INTRODUCE</h2>
           <div className="flex-1 border-t border-gray-200 dark:border-gray-700 ml-4" />
         </div>
         <div className="space-y-4 text-left">
@@ -68,7 +68,7 @@ const AboutCard = () => {
 
       {/* Skills */}
       <div className="flex items-center mb-4">
-        <h2 className="text-xl text-gray-900 dark:text-white">SKILL</h2>
+        <h2 className="text-xl text-gray-800 dark:text-white">SKILL</h2>
         <div className="flex-1 border-t border-gray-200 dark:border-gray-700 ml-4" />
       </div>
       <div className="flex justify-center items-center mb-4 shrink-0">

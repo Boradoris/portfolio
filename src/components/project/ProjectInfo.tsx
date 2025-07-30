@@ -155,7 +155,7 @@ const ProjectInfo = ({ slide, current, total, onPrev, onNext }: Props) => {
             className="group cursor-pointer flex flex-col items-center justify-center space-y-1"
             onClick={onNext}
           >
-            <h3 className="truncate text-xl sm:text-2xl md:text-3xl font-semibold text-gray-900 dark:text-white group-hover:underline group-hover:decoration-[1px]">
+            <h3 className="truncate text-xl sm:text-2xl md:text-3xl font-semibold text-gray-800 dark:text-white group-hover:underline group-hover:decoration-[1px]">
               {slide.title}
             </h3>
             <p className="text-sm sm:text-base text-gray-500 dark:text-gray-400 group-hover:underline group-hover:decoration-[1px]">

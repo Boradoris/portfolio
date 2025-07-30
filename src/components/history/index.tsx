@@ -32,7 +32,7 @@ const HistoryPanel = () => (
               className="w-16 h-16 object-contain rounded-full border border-gray-200 dark:border-gray-700 bg-white p-1"
             />
             <div>
-              <h2 className="text-2xl font-extrabold text-gray-900 dark:text-white">
+              <h2 className="text-2xl font-bold text-gray-800 dark:text-white">
                 {company.company}
               </h2>
               <p className="text-sm text-gray-600 dark:text-gray-400">{company.position}</p>
@@ -44,7 +44,7 @@ const HistoryPanel = () => (
           {company.projects.map(proj => (
             <div key={proj.id} className="mb-10">
               <div className="bg-white dark:bg-[#24272b] p-4 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                <h3 className="text-xl font-semibold text-gray-800 dark:text-white">
                   {proj.title}
                 </h3>
                 <span className="text-sm text-gray-500 dark:text-gray-400">{proj.period}</span>

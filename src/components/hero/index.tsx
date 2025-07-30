@@ -80,7 +80,7 @@ const HeroPanel = ({ textControls, wrapperControls, introControls, selected, onS
           {theme === "dark" ? (
             <FiSun size={24} className="text-white" />
           ) : (
-            <FiMoon size={24} className="text-gray-900" />
+            <FiMoon size={24} className="text-gray-800" />
           )}
         </button>
         <hr className="w-5 sm:w-6 border-t border-gray-300 dark:border-gray-600" />
@@ -97,7 +97,7 @@ const HeroPanel = ({ textControls, wrapperControls, introControls, selected, onS
                   : "hover:bg-gray-200 dark:hover:bg-gray-700"
               }`}
             >
-              <Icon size={24} className={theme === "dark" ? "text-white" : "text-gray-900"} />
+              <Icon size={24} className={theme === "dark" ? "text-white" : "text-gray-800"} />
             </button>
           );
         })}
@@ -121,13 +121,13 @@ const HeroPanel = ({ textControls, wrapperControls, introControls, selected, onS
           <div className="flex flex-col pl-4 sm:pl-6">
             <motion.h1
               variants={textItem}
-              className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white"
+              className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-800 dark:text-white"
             >
               안녕하세요 👋
             </motion.h1>
             <motion.h2
               variants={textItem}
-              className="mt-1 text-lg sm:text-xl md:text-2xl font-semibold text-gray-900 dark:text-white flex items-center"
+              className="mt-1 text-lg sm:text-xl md:text-2xl font-semibold text-gray-800 dark:text-white flex items-center"
             >
               <span className="hidden md:inline">
                 {typed}
@@ -140,7 +140,7 @@ const HeroPanel = ({ textControls, wrapperControls, introControls, selected, onS
 
         {/* 블록 레벨 요소 분리: motion.div 안에 p와 div */}
         <motion.div
-          className="mt-12 text-sm sm:text-base md:text-xl leading-relaxed text-gray-900 dark:text-white space-y-4"
+          className="mt-12 text-sm sm:text-base md:text-xl leading-relaxed text-gray-800 dark:text-white space-y-4"
           variants={introItem}
           initial="hidden"
           animate={introControls}

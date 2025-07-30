@@ -57,7 +57,7 @@ const HomePage: FC = () => {
   }, [selected, textControls, wrapperControls, introControls, panelControls]);
 
   return (
-    <div className="bg-white dark:bg-[#24272b] text-gray-900 dark:text-white min-h-screen flex flex-col font-sans">
+    <div className="bg-white dark:bg-[#24272b] text-gray-800 dark:text-white min-h-screen flex flex-col font-sans">
       <motion.section
         className="flex w-full h-screen overflow-hidden p-6 rounded-md"
         variants={wrapperVariants}

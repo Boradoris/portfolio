@@ -30,7 +30,7 @@ const Toast = ({ message, onClose, theme }: ToastProps) => {
         "fixed bottom-12 right-8 z-[9999] px-6 py-2 rounded-md shadow-lg text-base font-medium flex items-center gap-2 transition-transform",
         theme === "dark"
           ? "bg-gray-800 text-white"
-          : "bg-white text-gray-900 border border-gray-200",
+          : "bg-white text-gray-800 border border-gray-200",
         leaving ? "animate-slide-up-exit" : "animate-slide-up-enter",
       ].join(" "),
     [theme, leaving]
