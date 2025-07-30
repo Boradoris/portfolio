@@ -15,7 +15,7 @@ export const ThemeProvider = ({ children }: Props) => {
   // ① 로컬스토리지 없으면 기본 dark
   const [theme, setTheme] = useState<Theme>(() => {
     const stored = localStorage.getItem("theme") as Theme | null;
-    return stored ?? "dark";
+    return stored ?? "light";
   });
 
   useEffect(() => {
