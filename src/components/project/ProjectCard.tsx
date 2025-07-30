@@ -74,7 +74,7 @@ const ProjectCard = ({ card, index, isTop, onSwipe, dirRef }: CardProps) => {
           card.contain ? "object-contain" : "object-fill"
         }`}
       />
-      <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-black/5 via-black/10 to-black/15" />
+      <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-black/0 via-black/5 to-black/10" />
     </motion.div>
   );
 };
