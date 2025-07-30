@@ -96,8 +96,8 @@ const AboutCard = () => {
         ))}
       </div>
 
-      {/* Icon Grid (전체 카드가 스크롤 대상) */}
-      <motion.div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-6">
+      {/* Icon Grid */}
+      <motion.div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-6 mt-8">
         {enrichedStackItems.map(item => {
           const isBlurred = selectedTab !== null && item.category !== selectedTab;
           return (
@@ -108,7 +108,7 @@ const AboutCard = () => {
                 isBlurred ? "filter blur-sm" : ""
               }`}
             >
-              <div className="w-14 h-14 flex items-center justify-center bg-white rounded-md overflow-hidden">
+              <div className="w-14 h-14 flex items-center justify-center bg-white rounded-md overflow-hidden shadow-md">
                 <img
                   src={item.src}
                   alt={item.name}
