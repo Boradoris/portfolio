@@ -17,35 +17,23 @@ interface Props {
   total: number;
   onPrev: () => void;
   onNext: () => void;
-  isResetting: boolean;
 }
 
-const ProjectInfo = ({ slide, current, total, onPrev, onNext, isResetting }: Props) => {
+const ProjectInfo = ({ slide, current, total, onPrev, onNext }: Props) => {
   const [isPlaying, setIsPlaying] = useState(true);
   const progressControls = useAnimation();
-  const [textVisible, setTextVisible] = useState(true);
 
   // 텍스트 컨테이너 ref와 높이 상태
   const textContainerRef = useRef<HTMLDivElement>(null);
   const [textContainerHeight, setTextContainerHeight] = useState<number>(0);
 
-  // Reset 시 텍스트 숨기기
-  useEffect(() => {
-    if (isResetting) setTextVisible(false);
-  }, [isResetting]);
-
-  // 새 슬라이드 로드 시 텍스트 보이기
-  useEffect(() => {
-    if (!isResetting) setTextVisible(true);
-  }, [slide.id, isResetting]);
-
   // 텍스트가 보이는 순간 컨테이너 높이 측정해 저장
   useLayoutEffect(() => {
-    if (textVisible && textContainerRef.current) {
+    if (textContainerRef.current) {
       const { height } = textContainerRef.current.getBoundingClientRect();
       setTextContainerHeight(height);
     }
-  }, [slide.id, textVisible]);
+  }, [slide.id]);
 
   const handlePrev = useCallback(() => {
     if (current > 0) {
@@ -86,10 +74,6 @@ const ProjectInfo = ({ slide, current, total, onPrev, onNext, isResetting }: Pro
 
   // 프로그레스바 애니메이션 관리
   useEffect(() => {
-    if (isResetting) {
-      progressControls.stop();
-      return;
-    }
     progressControls.set({ width: 0 });
     if (isPlaying) {
       progressControls.start({
@@ -103,7 +87,7 @@ const ProjectInfo = ({ slide, current, total, onPrev, onNext, isResetting }: Pro
       };
     }
     return () => void progressControls.stop();
-  }, [slide.id, isPlaying, onNext, progressControls, isResetting]);
+  }, [slide.id, isPlaying, onNext, progressControls]);
 
   const [formattedCurrent, formattedTotal] = useMemo(
     () => [String(current + 1).padStart(2, "0"), String(total).padStart(2, "0")],
@@ -162,24 +146,25 @@ const ProjectInfo = ({ slide, current, total, onPrev, onNext, isResetting }: Pro
         style={{ minHeight: textContainerHeight || undefined, overflow: "visible" }}
       >
         <AnimatePresence mode="wait">
-          {textVisible && (
-            <motion.div
-              key={slide.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
-              className="flex flex-col items-center justify-center space-y-1"
-            >
-              <h3 className="truncate text-xl sm:text-2xl md:text-3xl font-semibold text-gray-900 dark:text-white">
-                {slide.title}
-              </h3>
-              <p className="text-sm sm:text-base text-gray-500 dark:text-gray-400">
-                {slide.period}
-              </p>
-              <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300">{slide.tech}</p>
-            </motion.div>
-          )}
+          <motion.div
+            key={slide.id}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="group cursor-pointer flex flex-col items-center justify-center space-y-1"
+            onClick={onNext}
+          >
+            <h3 className="truncate text-xl sm:text-2xl md:text-3xl font-semibold text-gray-900 dark:text-white group-hover:underline group-hover:decoration-[1px]">
+              {slide.title}
+            </h3>
+            <p className="text-sm sm:text-base text-gray-500 dark:text-gray-400 group-hover:underline group-hover:decoration-[1px]">
+              {slide.period}
+            </p>
+            <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 group-hover:underline group-hover:decoration-[1px]">
+              {slide.tech}
+            </p>
+          </motion.div>
         </AnimatePresence>
       </div>
     </div>
