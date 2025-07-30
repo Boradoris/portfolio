@@ -1,13 +1,15 @@
 import React from "react";
-import { HashRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import AppRoutes from "@/routes";
 import { ThemeProvider } from "./ThemeContext";
 
-const App = () => (
+const basename = (import.meta.env.BASE_URL || "/").replace(/\/$/, "");
+
+const App: React.FC = () => (
   <ThemeProvider>
-    <HashRouter basename={import.meta.env.BASE_URL}>
+    <BrowserRouter basename={basename}>
       <AppRoutes />
-    </HashRouter>
+    </BrowserRouter>
   </ThemeProvider>
 );
 
