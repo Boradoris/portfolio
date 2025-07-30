@@ -18,3 +18,11 @@ export type CompanyHistoryT = {
   duration: string;
   projects: ProjectT[];
 };
+
+export type CategoryKey = "frontend" | "library" | "backend" | "db" | "infra";
+
+export type StackItem = {
+  name: string;
+  icon: string; // 파일명 (예: "typescript.svg")
+  category: CategoryKey;
+};

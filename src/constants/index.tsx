@@ -10,7 +10,7 @@ import reportLogo from "@/assets/images/reportLogo.png";
 import irImg from "@/assets/images/irImg.png";
 import androidImg from "@/assets/images/androidImg.png";
 
-import { CompanyHistoryT } from "@/types";
+import { CompanyHistoryT, StackItem } from "@/types";
 
 export const historyList: CompanyHistoryT[] = [
   {
@@ -108,3 +108,39 @@ export const historyList: CompanyHistoryT[] = [
 ];
 
 export const skills = ["Front", "React", "JSP", "NEXT.JS"];
+
+export const stackList: StackItem[] = [
+  // 1) Frontend
+  { name: "ES6", icon: "es6.svg", category: "frontend" },
+  { name: "JavaScript", icon: "javascript.svg", category: "frontend" },
+  { name: "TypeScript", icon: "typescript.svg", category: "frontend" },
+  { name: "Vite", icon: "vite.svg", category: "frontend" },
+  { name: "React", icon: "react.svg", category: "frontend" },
+  { name: "Next.js", icon: "nextjs.svg", category: "frontend" },
+  { name: "Tailwind CSS", icon: "tailwind.svg", category: "frontend" },
+
+  // 2) Library
+  { name: "AntDesign", icon: "antdesign.svg", category: "library" },
+  { name: "Chart.js", icon: "chartjs.svg", category: "library" },
+  { name: "D3", icon: "d3.svg", category: "library" },
+  { name: "jQuery", icon: "jquery.svg", category: "library" },
+  { name: "React‑Query", icon: "reactQuery.svg", category: "library" },
+  { name: "Recoil", icon: "recoil.svg", category: "library" },
+  { name: "Zustand", icon: "zustand.svg", category: "library" },
+
+  // 3) Backend
+  { name: "Node.js", icon: "nodejs.svg", category: "backend" },
+  { name: "Spring", icon: "spring.svg", category: "backend" },
+  { name: "Thymeleaf", icon: "thymeleaf.svg", category: "backend" },
+
+  // 4) DB
+  { name: "MySQL", icon: "mysql.svg", category: "db" },
+  { name: "PostgreSQL", icon: "postgresql.svg", category: "db" },
+  { name: "MyBatis", icon: "mybatis.svg", category: "db" },
+
+  // 5) Infra & DevOps
+  { name: "Docker", icon: "docker.svg", category: "infra" },
+  { name: "GitHub", icon: "github.svg", category: "infra" },
+  { name: "GitLab", icon: "gitlab.svg", category: "infra" },
+  { name: "Nginx", icon: "nginx.svg", category: "infra" },
+];
