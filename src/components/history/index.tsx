@@ -56,7 +56,7 @@ const HistoryPanel = () => (
                     <FiCpu className="mr-1" />
                     <span className="font-semibold whitespace-nowrap">기술스택:</span>
                   </div>
-                  <div className="px-4 py-[6px] bg-gray-100 dark:bg-gray-800 rounded-md text-sm text-gray-800 dark:text-gray-200 inline-block">
+                  <div className="px-4 py-[6px] bg-gray-100 dark:bg-[#1f1f1f] rounded-md text-sm text-gray-800 dark:text-gray-200 inline-block">
                     {proj.tech.split(", ").join(" / ")}
                   </div>
                 </div>
