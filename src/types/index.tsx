@@ -6,8 +6,13 @@ export type ProjectT = {
   period: string;
   description: string;
   tech: string;
-  image?: string;
+  logo: string;
+  images?: string[];
   contain?: boolean;
+  details?: string[];
+  members?: string;
+  url?: string;
+  bannerColor?: string;
 };
 
 export type CompanyHistoryT = {

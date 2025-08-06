@@ -448,3 +448,12 @@
 @keyframes animloader {
   50% { transform: scale(1) translate(-50%, -50%); }
 }
+
+.modal-content {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.modal-content::-webkit-scrollbar {
+  display: none;
+}
+

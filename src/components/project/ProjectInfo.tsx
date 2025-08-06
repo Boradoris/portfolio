@@ -1,11 +1,11 @@
 import React, {
   memo,
   useState,
-  useEffect,
+  useLayoutEffect,
   useMemo,
   useCallback,
   useRef,
-  useLayoutEffect,
+  useEffect,
 } from "react";
 import { motion, AnimatePresence, useAnimation } from "framer-motion";
 import { FaStepBackward, FaPlay, FaPause, FaStepForward } from "react-icons/fa";
@@ -17,17 +17,31 @@ interface Props {
   total: number;
   onPrev: () => void;
   onNext: () => void;
+  setModalOpen: (open: boolean) => void;
+  isModalOpen: boolean;
 }
 
-const ProjectInfo = ({ slide, current, total, onPrev, onNext }: Props) => {
+const ProjectInfo = ({
+  slide,
+  current,
+  total,
+  onPrev,
+  onNext,
+  setModalOpen,
+  isModalOpen,
+}: Props) => {
   const [isPlaying, setIsPlaying] = useState(true);
   const progressControls = useAnimation();
 
-  // 텍스트 컨테이너 ref와 높이 상태
   const textContainerRef = useRef<HTMLDivElement>(null);
   const [textContainerHeight, setTextContainerHeight] = useState<number>(0);
 
-  // 텍스트가 보이는 순간 컨테이너 높이 측정해 저장
+  const techItems = useMemo(() => slide.tech.split(",").map(s => s.trim()), [slide.tech]);
+  const techDisplay = useMemo(() => {
+    if (techItems.length <= 4) return techItems;
+    return [...techItems.slice(0, 4), "..."];
+  }, [techItems]);
+
   useLayoutEffect(() => {
     if (textContainerRef.current) {
       const { height } = textContainerRef.current.getBoundingClientRect();
@@ -53,29 +67,21 @@ const ProjectInfo = ({ slide, current, total, onPrev, onNext }: Props) => {
 
   const controls = useMemo(
     () => [
-      {
-        icon: <FaStepBackward size={18} />,
-        onClick: handlePrev,
-        disabled: current === 0,
-      },
+      { icon: <FaStepBackward size={18} />, onClick: handlePrev, disabled: current === 0 },
       {
         icon: isPlaying ? <FaPause size={18} /> : <FaPlay size={18} />,
         onClick: togglePlay,
         disabled: false,
       },
-      {
-        icon: <FaStepForward size={18} />,
-        onClick: handleNext,
-        disabled: false,
-      },
+      { icon: <FaStepForward size={18} />, onClick: handleNext, disabled: false },
     ],
-    [current, isPlaying]
+    [current, isPlaying, handlePrev, handleNext, togglePlay]
   );
 
-  // 프로그레스바 애니메이션 관리
+  // 자동 재생: 모달이 열려 있으면 중단
   useEffect(() => {
     progressControls.set({ width: 0 });
-    if (isPlaying) {
+    if (isPlaying && !isModalOpen) {
       progressControls.start({
         width: "100%",
         transition: { duration: 5, ease: "linear" },
@@ -87,7 +93,7 @@ const ProjectInfo = ({ slide, current, total, onPrev, onNext }: Props) => {
       };
     }
     return () => void progressControls.stop();
-  }, [slide.id, isPlaying, onNext, progressControls]);
+  }, [slide.id, isPlaying, progressControls, isModalOpen]);
 
   const [formattedCurrent, formattedTotal] = useMemo(
     () => [String(current + 1).padStart(2, "0"), String(total).padStart(2, "0")],
@@ -95,8 +101,7 @@ const ProjectInfo = ({ slide, current, total, onPrev, onNext }: Props) => {
   );
 
   return (
-    <div className="flex flex-col items-center w-full max-w-lg px-4 sm:px-6 lg:px-8 mt-8">
-      {/* 컨트롤 버튼 */}
+    <div className="flex flex-col items-center w-full max-w-lg px-4 mt-8">
       <motion.div
         className="inline-flex items-center space-x-4 bg-gray-100 dark:bg-[#1f1f1f] rounded-xl shadow-sm px-4 py-2"
         initial={false}
@@ -112,8 +117,8 @@ const ProjectInfo = ({ slide, current, total, onPrev, onNext }: Props) => {
             whileTap={btn.disabled ? {} : { scale: 0.9 }}
             className={
               btn.disabled
-                ? "p-3 bg-white dark:bg-[#24272b] rounded-full shadow-md focus:outline-none transition opacity-50"
-                : "p-3 bg-white dark:bg-[#24272b] rounded-full shadow-md hover:shadow-lg focus:outline-none transition cursor-pointer"
+                ? "p-3 bg-white dark:bg-[#24272b] rounded-full shadow-md opacity-50"
+                : "p-3 bg-white dark:bg-[#24272b] rounded-full shadow-md hover:shadow-lg cursor-pointer"
             }
           >
             <span className="text-gray-600 dark:text-gray-200">{btn.icon}</span>
@@ -121,7 +126,6 @@ const ProjectInfo = ({ slide, current, total, onPrev, onNext }: Props) => {
         ))}
       </motion.div>
 
-      {/* 인덱스 표시 */}
       <div className="w-full flex justify-between mt-4 mb-1 px-1">
         <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
           {formattedCurrent}
@@ -131,7 +135,6 @@ const ProjectInfo = ({ slide, current, total, onPrev, onNext }: Props) => {
         </span>
       </div>
 
-      {/* 프로그레스바 */}
       <div className="w-full h-1 bg-gray-300 dark:bg-gray-600 rounded-full overflow-hidden">
         <motion.div
           animate={progressControls}
@@ -143,7 +146,7 @@ const ProjectInfo = ({ slide, current, total, onPrev, onNext }: Props) => {
       <div
         ref={textContainerRef}
         className="w-full mt-6 px-2 lg:px-4 py-4"
-        style={{ minHeight: textContainerHeight || undefined, overflow: "visible" }}
+        style={{ minHeight: textContainerHeight || undefined }}
       >
         <AnimatePresence mode="wait">
           <motion.div
@@ -152,17 +155,17 @@ const ProjectInfo = ({ slide, current, total, onPrev, onNext }: Props) => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="group cursor-pointer flex flex-col items-center justify-center space-y-1"
-            onClick={onNext}
+            className="group cursor-pointer flex flex-col items-center space-y-1"
+            onClick={() => setModalOpen(true)}
           >
-            <h3 className="truncate text-xl sm:text-2xl md:text-3xl font-semibold text-gray-800 dark:text-white group-hover:underline group-hover:decoration-[1px]">
+            <h3 className="font-semibold text-gray-800 dark:text-white group-hover:underline group-hover:decoration-[1px] whitespace-normal break-words sm:truncate sm:whitespace-nowrap sm:overflow-hidden sm:text-ellipsis text-[clamp(0.875rem,3.5vw,1rem)] sm:text-[clamp(1rem,3vw,1.25rem)] md:text-[clamp(1.6rem,2.5vw,1.6rem)]">
               {slide.title}
             </h3>
-            <p className="text-sm sm:text-base text-gray-500 dark:text-gray-400 group-hover:underline group-hover:decoration-[1px]">
+            <p className="text-gray-500 dark:text-gray-400 group-hover:underline group-hover:decoration-[1px] whitespace-normal break-words sm:truncate sm:whitespace-nowrap sm:overflow-hidden sm:text-ellipsis text-[clamp(0.75rem,3vw,0.875rem)] sm:text-[clamp(0.875rem,2.5vw,1rem)] md:text-[clamp(1rem,2vw,1.125rem)]">
               {slide.period}
             </p>
-            <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 group-hover:underline group-hover:decoration-[1px]">
-              {slide.tech}
+            <p className="text-gray-700 dark:text-gray-300 group-hover:underline group-hover:decoration-[1px] whitespace-normal break-words sm:truncate sm:whitespace-nowrap sm:overflow-hidden sm:text-ellipsis text-[clamp(0.75rem,3vw,0.875rem)] sm:text-[clamp(0.875rem,2.5vw,1rem)] md:text-[clamp(0.95rem,2vw,1.125rem)]">
+              {techDisplay.join(", ")}
             </p>
           </motion.div>
         </AnimatePresence>

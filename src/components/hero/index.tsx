@@ -75,7 +75,7 @@ const HeroPanel = ({ textControls, wrapperControls, introControls, selected, onS
         <button
           onClick={toggleTheme}
           aria-label="테마 변경"
-          className="p-3 sm:p-4 rounded-full focus:outline-none hover:bg-gray-200 dark:hover:bg-gray-700"
+          className="p-3 sm:p-4 rounded-full focus:outline-none hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer"
         >
           {theme === "dark" ? (
             <FiSun size={24} className="text-white" />
@@ -91,7 +91,7 @@ const HeroPanel = ({ textControls, wrapperControls, introControls, selected, onS
               key={panel}
               onClick={() => onSelect(panel)}
               aria-pressed={selected === panel}
-              className={`p-3 sm:p-4 rounded-full focus:outline-none ${
+              className={`p-3 sm:p-4 rounded-full focus:outline-none cursor-pointer ${
                 selected === panel
                   ? "bg-gray-200 dark:bg-gray-700"
                   : "hover:bg-gray-200 dark:hover:bg-gray-700"

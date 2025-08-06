@@ -1,13 +1,15 @@
-import React, { useState, useMemo, useCallback, useEffect, useRef, memo } from "react";
+import React, { useState, useMemo, useCallback, useRef, memo } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import ProjectInfo from "./ProjectInfo";
 import ProjectCard from "./ProjectCard";
 import { ProjectT } from "@/types";
 import { historyList } from "@/constants";
+import ProjectModal from "../ui/modal/ProjectModal";
 
 const slides: ProjectT[] = historyList.flatMap(company => company.projects).reverse();
 
 const ProjectPanel = () => {
+  const [modalOpen, setModalOpen] = useState(false);
   const [active, setActive] = useState<ProjectT[]>(slides);
   const [removed, setRemoved] = useState<ProjectT[]>([]);
   const dirRef = useRef<number>(0);
@@ -75,34 +77,45 @@ const ProjectPanel = () => {
   };
 
   return (
-    <motion.div
-      className="flex-1 flex flex-col items-center justify-center gap-8 px-4 py-4"
-      variants={panelVariants}
-      initial="initial"
-      animate="shrink"
-    >
-      <div className="relative w-[20rem] sm:w-[24rem] md:w-[28rem] lg:w-[40rem] xl:w-[36rem] 2xl:w-[48rem] h-[20rem] sm:h-[22rem] md:h-[24rem] lg:h-[28rem] xl:h-[30rem] 2xl:h-[32rem] max-w-full">
-        <AnimatePresence initial={false}>
-          {stack.map((card, i) => (
-            <ProjectCard
-              key={card.id}
-              card={card}
-              index={i}
-              isTop={i === stack.length - 1}
-              onSwipe={next}
-              dirRef={dirRef}
-            />
-          ))}
-        </AnimatePresence>
-      </div>
-      <ProjectInfo
-        slide={currentSlide}
-        current={currentIndex}
-        total={total}
-        onPrev={prev}
-        onNext={next}
-      />
-    </motion.div>
+    <>
+      <motion.div
+        className="flex-1 flex flex-col items-center justify-center gap-8 px-4 py-4"
+        variants={panelVariants}
+        initial="initial"
+        animate="shrink"
+      >
+        <div className="relative w-[20rem] sm:w-[24rem] md:w-[28rem] lg:w-[40rem] xl:w-[36rem] 2xl:w-[48rem] h-[20rem] sm:h-[22rem] md:h-[24rem] lg:h-[28rem] xl:h-[30rem] 2xl:h-[32rem] max-w-full">
+          <AnimatePresence initial={false}>
+            {stack.map((card, i) => (
+              <ProjectCard
+                key={card.id}
+                card={card}
+                index={i}
+                isTop={i === stack.length - 1}
+                onSwipe={next}
+                dirRef={dirRef}
+              />
+            ))}
+          </AnimatePresence>
+        </div>
+        <ProjectInfo
+          slide={currentSlide}
+          current={currentIndex}
+          total={total}
+          onPrev={prev}
+          onNext={next}
+          setModalOpen={setModalOpen}
+          isModalOpen={modalOpen}
+        />
+      </motion.div>
+      {modalOpen && (
+        <ProjectModal
+          isOpen={modalOpen}
+          onClose={() => setModalOpen(false)}
+          project={currentSlide}
+        />
+      )}
+    </>
   );
 };
 

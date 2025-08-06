@@ -66,7 +66,7 @@ const ProjectCard = ({ card, index, isTop, onSwipe, dirRef }: CardProps) => {
       }`}
     >
       <img
-        src={card.image}
+        src={card.logo}
         alt={card.title}
         loading="lazy"
         draggable="false"
