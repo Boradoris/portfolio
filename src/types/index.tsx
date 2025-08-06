@@ -13,6 +13,8 @@ export type ProjectT = {
   members?: string;
   url?: string;
   bannerColor?: string;
+  file?: string;
+  fileName?: string;
 };
 
 export type CompanyHistoryT = {

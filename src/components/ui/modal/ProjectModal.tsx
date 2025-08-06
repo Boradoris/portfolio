@@ -116,6 +116,18 @@ const ProjectModal = memo(function ProjectModal({ isOpen, onClose, project }: Pr
                   </a>
                 </div>
               )}
+              {project.file && (
+                <div className="flex flex-col text-gray-700 text-sm sm:text-base mt-4 sm:mt-0">
+                  <span className="font-semibold">첨부파일</span>
+                  <a
+                    href={project.file}
+                    download={project.fileName ?? ""}
+                    className="mt-1 font-medium text-blue-600 hover:underline"
+                  >
+                    파일 다운로드
+                  </a>
+                </div>
+              )}
             </section>
 
             <hr className="border-gray-200 my-6" />
